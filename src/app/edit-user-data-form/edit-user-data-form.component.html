@@ -1,0 +1,67 @@
+<legend>User Information</legend>
+<div style="position: fixed;top:10px;right:20px;"><a [routerLink]="['/']">Logout</a></div>
+
+<form [formGroup]="updateForm" (ngSubmit)="onSubmit()" >
+	<div class="row">
+		<div class="col-xs-3" style="padding-left: 50px; max-height: 100px;">
+			<div style="border-style: dashed;border-color:gray;">
+				<img src="{{imgURL}}" *ngIf="imgURL" id="avatar_img" name="avatar_img" style="max-height: 300px; cursor: pointer;" alt="Smiley face" width="100%" (click) = "onImgClick()">
+				<img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" *ngIf="!imgURL" id="avatar_img" style="max-height: 300px; cursor: pointer;" alt="Smiley face" width="100%" (click) = "onImgClick()">
+			</div>
+			<input #file type="file" style="display:none;" name="avatar_input" id="avatar_input" accept="image/*" (change)="readURL(file.files)">
+		</div>
+		<div class="col-xs-9">
+			<div class="form-group row"> <!-- GUD -->
+				<label class="col-xs-2 col-form-label" style="text-align: right;">GUID</label>
+				<div class="col-xs-4" style="margin-left: 5%;">{{user.guid}}</div>
+			</div>
+		
+			<div class="form-group row"> <!-- E-mail -->
+				<label class="col-xs-2 col-form-label" style="text-align: right;">E-mail</label>
+				<div class="col-xs-4" style="margin-left: 5%;">{{user.email}}</div>	
+			</div>
+		
+			<div class="form-group row" [ngClass]="{ 'has-error': invalidFirstName(), 'has-success': success[0] }"> <!-- First Name -->
+				<label class="col-xs-2 col-form-label" for="first_name" style="text-align: right;">First Name</label>
+				<div class="col-xs-4" style="margin-left: 5%;">
+					<input type="text" formControlName="first_name" class="form-control" id="first_name" name="first_name" placeholder="{{user.first_name}}" (focus) = "onTextFocus()">
+				</div>
+				<p *ngIf="invalidFirstName()" id="first_name_error" class="help-block">{{this.serviceErrors.first_name || 'Invalid first name.'}}</p>
+				<p *ngIf="success[0]" id="first_name_success" class="help-block">Update success</p>
+			</div>
+		
+			<div class="form-group row" [ngClass]="{ 'has-error': invalidLastName(), 'has-success': success[1] }"> <!-- Last Name -->
+				<label class="col-xs-2 col-form-label" for="last_name" style="text-align: right;">Last Name</label>
+				<div class="col-xs-4" style="margin-left: 5%;">
+					<input type="text" formControlName="last_name" class="form-control" id="last_name" name="last_name" placeholder="{{user.last_name}}" (focus) = "onTextFocus()">
+				</div>
+				<p *ngIf="invalidLastName()" id="last_name_error" class="help-block">{{this.serviceErrors.last_name || 'Invalid last name.'}}</p>
+				<p *ngIf="success[1]" id="last_name_success" class="help-block">Update success</p>
+			</div>
+		
+			<div class="form-group row" [ngClass]="{ 'has-error': invalidZipcode(), 'has-success': success[2] }"> <!-- Zip Code -->
+				<label class="col-xs-2 col-form-label" for="zipcode" style="text-align: right;">Zip Code</label>
+				<div class="col-xs-4" style="margin-left: 5%;">
+					<input type="text" formControlName="zipcode" class="form-control" id="zipcode" name="zipcode" placeholder="{{user.zipcode}}" (focus) = "onTextFocus()">
+				</div>
+				<p *ngIf="invalidZipcode()" id="zipcode_error" class="help-block">{{this.serviceErrors.zipcode || 'Invalid zip code.'}}</p>
+				<p *ngIf="success[2]" id="first_name_success" class="help-block">Update success</p>
+			</div>
+		
+			<div class="form-group row" [ngClass]="{ 'has-error': invalidPassword, 'has-success': success[3] }"> <!-- Password -->
+				<label class="col-xs-2 col-form-label" style="text-align: right;">Password</label>
+				<div class="col-xs-4" style="margin-left: 5%;">
+					<input type="password" formControlName="password" class="form-control" id="password" name="password" placeholder="*******************************************************" (focus) = "onPassFocus()" (focusout) = "onPassFocusOut()" (keypress) = "onChange()">
+				</div>
+				<p *ngIf="invalidPassword" id="password_error" class="help-block">{{this.serviceErrors.password || 'Invalid password.'}}</p>
+				<p *ngIf="success[3]" id="password_success" class="help-block">Update success</p>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group row" style="text-align: center;"> <!-- Register Button -->
+			<button type="submit" class="btn btn-primary" style="align-content: center;">Save changes</button>
+		</div>
+	</div>
+</form>
+<p><a (click) = "onBack()" style="cursor: pointer;"><< Home</a></p>

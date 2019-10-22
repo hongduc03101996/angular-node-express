@@ -1,0 +1,23 @@
+
+<legend>Login Form</legend>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+	<div class="form-group" [ngClass]="{ 'has-error': invalidEmail || requiredEmail()}"> <!-- Email -->
+		<label for="email" class="control-label">E-mail</label>
+		<input type="text" formControlName="email" class="form-control" id="email" name="email" placeholder="your@email.com">
+		<p *ngIf="invalidEmail || requiredEmail()" id="email_error" class="help-block">Invalid email address.</p>
+	</div>
+    
+	<div class="form-group" [ngClass]="{ 'has-error': invalidPassword || requiredPassword()}"> <!-- Password -->
+		<label for="password" class="control-label">Password</label>
+		<input type="password" formControlName="password" class="form-control" id="password" name="password" placeholder="*****">
+		<p *ngIf="invalidPassword || requiredPassword()" id="password_error" class="help-block">Invalid password.</p>
+	</div>
+	
+	<div class="form-group"> <!-- Login Button -->
+		<p *ngIf="invalidLogin" id="login_error" style="color:red" class="help-block">{{this.err || 'Invalid login.'}}</p>
+		<button type="submit" class="btn btn-primary">Login</button>
+	</div>
+	<p><a [routerLink]="['/register']">Register</a></p>
+</form>	

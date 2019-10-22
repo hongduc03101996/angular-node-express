@@ -1,0 +1,42 @@
+<legend>User Information</legend>
+<div style="position: fixed;top:10px;right:20px;"><a [routerLink]="['/']">Logout</a></div>
+	
+<form>
+	<div class="row">
+		<div class="col-xs-3" style="padding-left: 50px; max-height: 100px;">
+			<div>
+				<img src="{{imgURL}}" *ngIf="imgURL" id="avatar_img" style="max-height: 100px;" alt="Smiley face" width="65%" (click) = "onImgClick()">
+				<img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" *ngIf="!imgURL" id="avatar_img" style="max-height: 300px;" alt="Smiley face" width="65%" (click) = "onImgClick()">
+			</div>
+			<input #file type="file" style="display:none;" name="avatar_input" id="avatar_input" accept="image/*" (change)="readURL(file.files)">
+		</div>
+		<div class="col-xs-9">
+			<div class="form-group row"> <!-- GUD -->
+				<label class="col-xs-2 col-form-label" style="text-align: right;">GUID</label>
+				<div class="col-xs-4" style="margin-left: 5%;">{{user.guid}}</div>
+			</div>
+		
+			<div class="form-group row"> <!-- E-mail -->
+				<label class="col-xs-2 col-form-label" style="text-align: right;">E-mail</label>
+				<div class="col-xs-4" style="margin-left: 5%;">{{user.email}}</div>	
+            </div>
+            
+            <div class="form-group row"> <!-- First-name -->
+				<label class="col-xs-2 col-form-label" style="text-align: right;">First name</label>
+				<div class="col-xs-4" style="margin-left: 5%;">{{user.first_name}}</div>	
+			</div>
+		
+			<div class="form-group row"> <!-- Last-name -->
+				<label class="col-xs-2 col-form-label" style="text-align: right;">Last name</label>
+				<div class="col-xs-4" style="margin-left: 5%;">{{user.last_name}}</div>	
+			</div>
+            
+            <div class="form-group row"> <!-- Zip-code -->
+				<label class="col-xs-2 col-form-label" style="text-align: right;">Zipcode</label>
+				<div class="col-xs-4" style="margin-left: 5%;">{{user.zipcode}}</div>	
+            </div>
+            
+		</div>
+    </div>
+</form>
+<p><a (click) = "onBack()" style="cursor: pointer;"><< Home</a></p>

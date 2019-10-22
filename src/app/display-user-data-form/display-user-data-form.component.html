@@ -1,0 +1,28 @@
+<legend>Home Page</legend>
+<div style="position: fixed;top:8px;right:20px;"><b>Hello </b><a (click) = "editLink()" style="margin-right: 20px;cursor: pointer;"> {{user.first_name}} {{user.last_name}}</a> <a [routerLink]="['/']" style="cursor: pointer;"> Logout</a></div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let _user of users">
+        <tr *ngIf="_user.guid == user.guid; else elseBlock" style="background: lightskyblue; color: white; cursor: pointer;" [routerLink]="['/edit/' + user.guid]">
+            <td>{{_user.first_name}}</td>
+            <td>{{_user.last_name}}</td>
+            <td>{{_user.email}}</td>
+        </tr>
+        <ng-template #elseBlock>
+            <tr style="cursor: pointer;" [routerLink]="['/info/' + _user.guid]">
+                <td>{{_user.first_name}}</td>
+                <td>{{_user.last_name}}</td>
+                <td>{{_user.email}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-primary" (click) = "onExport()">Export</button>
